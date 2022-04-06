@@ -18,24 +18,22 @@ export default [
       },
     ],
   },
-  // {
-  //   path: '/admin',
-  //   name: 'admin',
-  //   icon: 'crown',
-  //   access: 'canAdmin',
-  //   component: './Admin',
-  //   routes: [
-  //     {
-  //       path: '/admin/sub-page',
-  //       name: 'sub-page',
-  //       icon: 'smile',
-  //       component: './Welcome',
-  //     },
-  //     {
-  //       component: './404',
-  //     },
-  //   ],
-  // },
+  {
+    path: '/',
+    redirect: '/dashboard',
+  },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    icon: 'crown',
+    component: '@/pages/DashBoard',
+  },
+  {
+    path: '/userlist',
+    name: 'userlist',
+    icon: 'UserOutlined',
+    component: '@/pages/userlist',
+  },
   {
     component: './404',
   },

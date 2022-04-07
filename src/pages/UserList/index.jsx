@@ -1,12 +1,52 @@
 import React, { useRef } from 'react'
 import { PageContainer } from '@ant-design/pro-layout'
 import ProTable, { TableDropdown } from '@ant-design/pro-table';
-import { Button, Tag, Space, Menu, Dropdown } from 'antd';
-import { PlusOutlined, EllipsisOutlined } from '@ant-design/icons';
+import { Button, Tag, Space, Menu, Dropdown, Avatar, Switch } from 'antd';
+import { PlusOutlined, EllipsisOutlined, UserOutlined } from '@ant-design/icons';
+import { getUsers } from '@/services/ant-design-pro/user';
 
 export default function UserList () {
   const actionRef = useRef();
-  const columns = []
+  const columns = [
+    {
+      title: '头像',
+      dataIndex: 'avatar_url',
+      hideInSearch: true,
+      render: (_, record) => <Avatar src={record.avatar_url} size={32} icon={UserOutlined} />
+    },
+    {
+      title: '姓名',
+      hideInSearch: true,
+      dataIndex: 'name',
+    },
+    {
+      title: '邮箱',
+      hideInSearch: true,
+      dataIndex: 'email',
+    },
+    {
+      title: '是否禁用',
+      dataIndex: 'is_locked',
+      hideInSearch: true,
+      render: (_, record) => <Switch
+        checkedChildren="开启"
+        unCheckedChildren="禁用"
+        defaultChecked={record.is_locked}
+        onChange={() => { }}
+      />
+    },
+    {
+      title: '创建时间',
+      dataIndex: 'created_at',
+      hideInSearch: true,
+    },
+    {
+      title: '操作',
+      dataIndex: 'option',
+      hideInSearch: true,
+      render: (_, record) => <a onChange={() => { }}>编辑</a>
+    },
+  ]
   return (
     <PageContainer>
       <ProTable
@@ -21,6 +61,7 @@ export default function UserList () {
         //     params,
         //   });
         // }}
+        request={async (params = {}) => getUsers(params)}
         editable={{
           type: 'multiple',
         }}
@@ -34,18 +75,6 @@ export default function UserList () {
         rowKey="id"
         search={{
           labelWidth: 'auto',
-        }}
-        form={{
-          // 由于配置了 transform，提交的参与与定义的不同这里需要转化一下
-          syncToUrl: (values, type) => {
-            if (type === 'get') {
-              return {
-                ...values,
-                created_at: [values.startTime, values.endTime],
-              };
-            }
-            return values;
-          },
         }}
         pagination={{
           pageSize: 5,

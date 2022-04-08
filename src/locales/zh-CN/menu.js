@@ -50,4 +50,5 @@ export default {
   'menu.editor.mind': '脑图编辑器',
   'menu.editor.koni': '拓扑编辑器',
   'menu.userlist': '用户列表',
+  'menu.txetedit': '富文本编辑器',
 };

@@ -35,6 +35,12 @@ export default [
     component: '@/pages/userlist',
   },
   {
+    path: '/txetedit',
+    name: 'txetedit',
+    icon: 'UserOutlined',
+    component: '@/pages/TextEdit',
+  },
+  {
     component: './404',
   },
 ];
